@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Underrated Music</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    </head>
+
+    <body class="w3-container w3-dark-gray w3-mobile">
+		<header>
+			<h1 class="w3-center"><i class="fa fa-resistance w3-text-red">&nbsp;</i>Underrated Music.com&nbsp;<i class="fa fa-resistance w3-text-red"></i></h1>
+			<h2 class="w3-border-bottom">Find &amp; Share your Favorite <i>Unknown</i> Bands</h2>
+			<div class="w3-bar w3-large">
+			  <a href="/" class="w3-bar-item w3-button w3-hover-text-white w3-hover-none w3-border-black w3-bottombar w3-hover-border-white w3-mobile">Home</a>
+			  <a href="/list" class="w3-bar-item w3-button w3-hover-text-white w3-hover-none w3-border-red w3-bottombar w3-hover-border-white w3-mobile">Explore</a>
+			  <a href="/submit" class="w3-bar-item w3-button w3-hover-text-white w3-hover-none w3-border-black w3-bottombar w3-hover-border-white w3-mobile">Share</a>
+			  <a href="/faq" class="w3-bar-item w3-button w3-hover-text-white w3-hover-none w3-border-black w3-bottombar w3-hover-border-white w3-mobile">FAQ</a>
+			</div>
+		</header>
+
+
+		<p></p>
+		<div class="w3-row-padding">
+			<div class="w3-half">
+				<p></p>
+				<span class="w3-tag w3-xlarge w3-padding w3-red">
+					Browse bands
+				</span>
+				<p></p>
+			</div>
+			<div class="w3-half">		
+				<b>Filter by Genre</b>
+				<form action="/list" method="post">
+					<select onchange="this.form.submit()" name="genre" class="w3-border w3-input">
+					<option value="all"  <%= genre == 'undefined' ? 'selected' : ''%>>All</option>	
+
+						<%
+							for(var i=0; i< genres.length; i++)
+							{ %>
+								  <option value="<%=genres[i].genre%>" <%= genres[i].genre == genre ? 'selected' : ''%>><p class="w3-center"><%=genres[i].genre%></p></option>
+							<%} %>
+					}
+					</select>					
+				</form>		
+			</div>
+		</div>
+
+
+		<ul class="" style="list-style: none;padding-left: 0.2em">
+			<%
+			for(var i=0; i < result.length; i++)
+			{
+			%> 
+			<li class="w3-border-red w3-border" style="margin:2em 0em;box-shadow: 0em 0em 1em black">
+				<a target=blank href="https://www.google.com/search?q=<%= result[i].name %>+deezer" style="text-decoration: none">
+					<div class="w3-container">
+						<h2 class=""><%= result[i].name %></h2>					
+					</div>
+
+					<div class="w3-container w3-serif w3-text-sand">
+						<p class="">
+							
+				  			<span class="w3-xlarge"><i>"<%= result[i].commentary %>"</i></span>
+			  			</p>
+
+			  			<div class="w3-large">
+								<a style="text-decoration: none;" href="/like/<%= result[i].id %>" class="fa fa-heart w3-text-red w3-hover-text-white"></a>
+								<span class="w3-text-yellow">
+									<%= result[i].likes %>
+								</span>
+							</div>
+			  			
+					</div>
+				</a>
+			</li> 
+			<%
+			} %>
+		</ul>
+
+
+
+
+
+	</body>
+</html>

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Underrated Music</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    </head>
+
+    <body class="w3-container w3-dark-gray w3-mobile">
+		<header>
+			<h1 class="w3-center"><i class="fa fa-resistance w3-text-red">&nbsp;</i>Underrated Music.com&nbsp;<i class="fa fa-resistance w3-text-red"></i></h1>
+			<h2 class="w3-border-bottom">Find &amp; Share your Favorite <i>Unknown</i> Bands</h2>
+			<div class="w3-bar w3-large">
+			  <a href="/" class="w3-bar-item w3-button w3-hover-text-white w3-hover-none w3-border-black w3-bottombar w3-hover-border-white w3-mobile">Home</a>
+			  <a href="/list" class="w3-bar-item w3-button w3-hover-text-white w3-hover-none w3-border-black w3-bottombar w3-hover-border-white w3-mobile">Explore</a>
+			  <a href="/submit" class="w3-bar-item w3-button w3-hover-text-white w3-hover-none w3-border-red w3-bottombar w3-hover-border-white w3-mobile">Share</a>
+			  <a href="/faq" class="w3-bar-item w3-button w3-hover-text-white w3-hover-none w3-border-black w3-bottombar w3-hover-border-white w3-mobile">FAQ</a>
+			</div>
+		</header>
+
+	
+
+
+		<p></p>
+		<span class="w3-tag w3-xlarge w3-padding w3-red">
+			Share a band
+		</span>
+		<p></p>
+		<!--<form action="/submit" method=post onsubmit="return checkForm()">-->
+		<form action="/submit" method=post id="formulaire">
+			<div class="w3-row-padding">
+				<div class="w3-half">
+					<label for="name"><b>Band Name</b></label>
+					<input class="w3-border w3-round w3-input" required type="text" name="name" id="name">
+				</div>
+				<div class="w3-half"></div>
+			</div>
+			<div class="w3-row-padding">
+				<div class="w3-half">
+					<label for="genre"><b>Genre</b></label>				
+					<select name="genre" class="w3-border w3-round w3-input" id="genre">
+					<option value="" disabled selected>choose a genre</option>
+					<%
+						for(var i=0; i< genres.length; i++)
+						{ %>
+							  <option value="<%=genres[i].genre%>"><%=genres[i].genre%></option>
+						<%} %>
+					</select>
+				</div>
+				<div class="w3-half">
+					<label for="otherGenre"> <b>or</b>  </label><input class="w3-border w3-round w3-input" type="text" name="otherGenre" placeholder=" add another genre" id="otherGenre">
+				</div>
+			</div>
+			<div class="w3-row-padding">
+				<div class="w3-half">
+					<label for="commentary"><b>Commentary</b></label>
+					<input class="w3-border w3-round w3-input" required type="text" name="commentary" id="commentary">
+				</div>
+				<div class="w3-half"></div>
+			</div>
+			<p></p>
+			<!--<input type="submit" class="w3-button w3-red w3-hover-green w3-large">-->
+			<p class="w3-button w3-red w3-hover-green w3-large" onclick="checkForm()">Submit</p>
+		</form>
+
+		<script>
+		function checkForm() {
+			/*console.log("band name = " + document.getElementById("name").value);
+			console.log("genre = " + document.getElementById("genre").value);
+			console.log("other genre = " + document.getElementById("otherGenre").value);
+			console.log("lala" + name);*/
+			var band = document.getElementById("name").value;
+			var comment = document.getElementById("commentary").value;
+			var genre = document.getElementById("genre").value;
+			var otherGenre = document.getElementById("otherGenre").value;
+			var genreFinal = genre;
+			if(genreFinal=='') genreFinal=otherGenre;
+			if(genreFinal=='')
+			{
+				//alert("please choose a genre");
+				document.getElementById('modalFail').style.display='block';
+				//return(false);
+			}
+			else
+			{
+				document.getElementById('confirmBox').innerHTML="<p><b>Band :</b> " + band + "</p><p><b>Genre :</b> " + genreFinal + "</p><p><b>Commentary :</b> " + comment + "</p>";
+				document.getElementById('modalConfirm').style.display='block';
+				//return(confirm("Band : " + band + "\nGenre : " + genreFinal + "\nCommentary : " + comment + "\nYou are going to add this band"));
+				document.getElementById('confirmButton').onclick= function(){document.getElementById('formulaire').submit()};
+			}
+		    	
+		}
+		</script>
+
+
+
+		<p>For user security, we do not accept links.</p>
+
+		<div id="modalFail" class="w3-modal">
+		  <div class="w3-modal-content">
+
+		 	<header class="w3-container w3-dark-gray w3-text-sand"> 
+		      <span onclick="document.getElementById('modalFail').style.display='none'" 
+		      class="w3-button w3-display-topright">&times;</span>
+		      <p>Trying to submit a band I see !</p>
+		 	</header>
+
+		      <div class="w3-container w3-red w3-text-sand">
+			      <h2>Please choose a genre..</h2>
+			  </div>
+
+			  <footer class="w3-container w3-dark-gray w3-text-sand">
+			        <p><span onclick="document.getElementById('modalFail').style.display='none'" class="w3-button w3-dark-gray w3-hover-sand w3-text-sand"><b>Got it!</b></span></p>
+			     </footer>
+		    </div>
+		  </div>
+		</div>
+
+		<div id="modalConfirm" class="w3-modal">
+		  <div class="w3-modal-content">
+
+		 	<header class="w3-container w3-dark-gray w3-text-sand"> 
+		      <span onclick="document.getElementById('modalConfirm').style.display='none'" 
+		      class="w3-button w3-display-topright">&times;</span>
+		      <p><b>You are going to submit a band ! Thank you!</b></p>
+		 	</header>
+
+		      <div class="w3-container w3-sand w3-text-black">
+			      <span id="confirmBox"></span>
+			  </div>
+
+			  <footer class="w3-container w3-dark-gray w3-text-sand">
+			  	<p></p>
+			       <span id=confirmButton class="w3-button w3-green w3-large">Confirm</span>
+			       <span onclick="document.getElementById('modalConfirm').style.display='none'" class="w3-button w3-red w3-large">Cancel</span>
+			      <p></p>
+			     </footer>
+		    </div>
+		  </div>
+		</div>
+
+		<script>
+		// Get the modal
+		var modalFail = document.getElementById('modalFail');
+		var modalConfirm = document.getElementById('modalConfirm');
+		// When the user clicks anywhere outside of the modal, close it
+		window.onclick = function(event) {
+		    if (event.target == modalFail) {
+		        modalFail.style.display = "none";
+		    }
+		    if (event.target == modalConfirm) {
+		        modalConfirm.style.display = "none";
+		    }
+		}
+		</script>
+
+
+	</body>
+</html>
