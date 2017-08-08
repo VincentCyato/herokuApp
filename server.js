@@ -30,10 +30,25 @@ app.set('view engine', 'ejs');
 app.use(express.static(__dirname + '/public'));
 
 // set the home page route
-app.get('/', function(req, res) {
+app.get('/', function(req, res) {/*
 	console.log("rendering home page");
     // ejs render automatically looks in the views folder
-    res.render('index');
+    res.render('index');*/
+        
+    	pool.getConnection(function(err, connection){
+    		connection.query("SELECT * FROM `sql11187090`.`BAND` order by likes desc LIMIT 5", function (err, result)
+    			{
+    			    connection.query("SELECT DISTINCT genre FROM `sql11187090`.`BAND`", function(err2,genres)
+    			    {
+    			    	console.log("rendering home page");
+        				res.render('index', {result: result, genres: genres});
+        				if (err2) throw err2;
+        		    });
+        		    connection.release();
+        		    if (err) throw err;
+        		});
+    	});
+
 });
 
 app.listen(port, function() {
