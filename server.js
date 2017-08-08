@@ -8,8 +8,8 @@ var urlencodedParser = bodyParser.urlencoded({ extended: false });
 //  URL  us-cdbr-iron-east-05.cleardb.net/heroku_f3ce5ab7bab9107  username:b48dd40b3a071b  pwd:ff65afe1
 var mysql = require('mysql');
 
-var pool = mysql.createPool(process.env.DATABASE_URL);
-/*
+//var pool = mysql.createPool(process.env.DATABASE_URL);
+
 var pool = mysql.createPool({
 	connectionLimit : 10,
   host: "sql11.freemysqlhosting.net",
@@ -17,7 +17,7 @@ var pool = mysql.createPool({
   password: "htmXwilHAC",
   database: "sql11187090"
 });
-
+/*
 var pool = mysql.createPool({
 	connectionLimit : 10,
   host: "us-cdbr-iron-east-05.cleardb.net",
