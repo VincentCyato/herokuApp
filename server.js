@@ -5,8 +5,9 @@ var bodyParser = require('body-parser'); // Charge le middleware de gestion des 
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
 
 
-
+//  URL  us-cdbr-iron-east-05.cleardb.net/heroku_f3ce5ab7bab9107  username:b48dd40b3a071b  pwd:ff65afe1
 var mysql = require('mysql');
+/*
 var pool = mysql.createPool({
 	connectionLimit : 10,
   host: "sql11.freemysqlhosting.net",
@@ -14,7 +15,14 @@ var pool = mysql.createPool({
   password: "htmXwilHAC",
   database: "sql11187090"
 });
-
+*/
+var pool = mysql.createPool({
+	connectionLimit : 10,
+  host: "us-cdbr-iron-east-05.cleardb.net",
+  user: "b48dd40b3a071b",
+  password: "ff65afe1",
+  database: "heroku_f3ce5ab7bab9107"
+});
 app.use(session({secret: 'todotopsecret'}))
 
 app.use(function(req, res, next){
