@@ -4,8 +4,15 @@ var session = require('cookie-session');// Charge le middleware de sessions
 var bodyParser = require('body-parser'); // Charge le middleware de gestion des parametres
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
 
+//PostgreS 
+var pg = require('pg');
 
-//  URL  us-cdbr-iron-east-05.cleardb.net/heroku_f3ce5ab7bab9107  username:b48dd40b3a071b  pwd:ff65afe1
+
+
+
+
+
+//MYSQL  URL  us-cdbr-iron-east-05.cleardb.net/heroku_f3ce5ab7bab9107  username:b48dd40b3a071b  pwd:ff65afe1
 var mysql = require('mysql');
 
 //var pool = mysql.createPool(process.env.DATABASE_URL);
